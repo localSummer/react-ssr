@@ -1,20 +1,26 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import './layout.less';
 
 class Layout extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <div>
-        <Link to="/index">首页</Link>
-        <Link to="/list">列表页</Link>
-        <div>
-          {
-            this.props.children
-          }
-        </div>
+      <div className="layout-box">
+        <h1>koa+react+ssr</h1>
+        <NavLink to="/index" style={{ marginLeft: '10px' }}>
+          首页
+        </NavLink>
+        <NavLink style={{ marginLeft: '10px' }} to="/list">
+          列表页
+        </NavLink>
+        {this.props.children}
       </div>
     );
   }
 }
-
+//带入路由信息
 export default Layout;

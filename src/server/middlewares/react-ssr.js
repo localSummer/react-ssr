@@ -1,9 +1,14 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
+import { Helmet } from 'react-helmet';
 
-import App from '../../client/router';
+import Layout from '../../client/app/layout';
 import routeList, { matchRoute } from '../../client/router/route-config';
+import getAssets from '../common/assets';
+
+// 得到静态资源
+const assetsMap = getAssets();
 
 export default async (ctx, next) => {
   const path = ctx.request.path; // 等同于 ctx.req.url
@@ -27,32 +32,43 @@ export default async (ctx, next) => {
     fetchResult = await fetchDataFn();
   }
 
-  // 将预取数据在这里传递进去，组内通过props.staticContext获取
-  const context = {
-    initialData: fetchResult,
+  let { page } = fetchResult || {};
+
+  let tdk = {
+    title: '默认标题 - my react ssr',
+    keywords: '默认关键词',
+    description: '默认描述',
   };
 
+  if (page && page.tdk) {
+    tdk = page.tdk
+  }
+
   const html = renderToString(
-    <StaticRouter location={path} context={context}>
-      <App routeList={routeList} />
+    <StaticRouter>
+      <Layout>
+        <targetRoute.component initialData={ fetchResult }></targetRoute.component>
+      </Layout>
     </StaticRouter>
   );
+
+  const helmet = Helmet.renderStatic();
 
   ctx.body = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8"/>
-      <title>my react ssr</title>
-      <meta name="keyword" content="关键词内容"/>
-      <meta name="description" content="描述内容"/>
+      ${helmet.title.toString()}
+      ${helmet.meta.toString()}
+      ${assetsMap.css.join('')}
     </head>
     <body>
       <div id="root">${html}</div>
       <textarea id="ssrTextInitData" style="display:none;">
         ${JSON.stringify(fetchResult)}
       </textarea>
-      <script type="text/javascript" src="index.js"></script>
+      ${assetsMap.js.join('')}
     </body>
     </html>
   `;

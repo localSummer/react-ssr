@@ -11,7 +11,7 @@ const Root = () => (
 );
 
 function clientRender() {
-  // 初始数据
+  // 初始数据只有首页有
   let initialData = JSON.parse(
     document.getElementById('ssrTextInitData').value
   );

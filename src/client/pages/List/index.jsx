@@ -1,22 +1,16 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { mockData } from './data';
 
 class List extends React.Component {
   constructor(props) {
     super(props);
 
-    let initialData = null; // 初始化数据
-    // webpack 定义的变量
-    if (__SERVER__) {
-      // 如果是当然是服务端执行
-      initialData = props.staticContext.initialData || {};
-    } else {
-      console.log('props: ', props);
-      //客户端渲染
-      initialData = props.initialData || {};
-    }
-
-    this.state = initialData;
+    const initData = props.initialData || {};
+    this.state = {
+      page: initData.page,
+      fetchData: initData.fetchData,
+    };
   }
 
   static async getInitialProps() {
@@ -36,30 +30,36 @@ class List extends React.Component {
       fetchData: res,
       page: {
         tdk: {
-          title: '首页',
-          keyword: 'React 服务端渲染',
-          description: 'React 双端同构'
-        }
-      }
+          title: '列表页',
+          keywords: 'React 服务端渲染',
+          description: 'React 双端同构',
+        },
+      },
     };
   }
 
   componentDidMount() {
-    // 客户端接管后，如果默认进入 Index 页面，那么在客户端组件上并不会添加initialData属性，需要手动拉取一下
-    if (!this.state.data) {
-      List.getInitialProps().then(res => {
+    console.log('this.state: ', this.state);
+    if (!this.state.fetchData) {
+      List.getInitialProps().then((res) => {
         this.setState({
-          data: res.fetchData.data || []
+          fetchData: res.fetchData,
+          page: res.page,
         });
-      })
+      });
     }
   }
-  
 
   render() {
-    const { code, data } = this.state;
+    const { code, data } = this.state.fetchData || {};
+    const { tdk = {} } = this.state.page || {};
     return (
       <div>
+        <Helmet>
+          <title>{tdk.title}</title>
+          <meta name="description" content={tdk.description} />
+          <meta name="keywords" content={tdk.keywords} />
+        </Helmet>
         {data &&
           data.map((item, index) => {
             return (
