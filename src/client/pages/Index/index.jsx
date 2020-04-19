@@ -1,7 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import withStyles from 'isomorphic-style-loader/withStyles'
 import PageContainer from '../../common/components/PageContainer'
-import './index.less';
+import styles from './index.less';
 
 class Index extends React.Component {
   constructor(props) {
@@ -41,4 +42,4 @@ class Index extends React.Component {
   }
 }
 
-export default PageContainer(Index);
+export default withStyles(styles)(PageContainer(Index));

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './layout.less';
+import withStyles from 'isomorphic-style-loader/withStyles'
+import styles from './layout.less';
 
 class Layout extends React.Component {
   constructor(props) {
@@ -26,4 +27,4 @@ class Layout extends React.Component {
   }
 }
 //带入路由信息
-export default Layout;
+export default withStyles(styles)(Layout);

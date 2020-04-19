@@ -35,16 +35,22 @@ module.exports = {
         test: /\.(le|c)ss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'isomorphic-style-loader',
           },
           {
             loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+            },
           },
           {
             loader: 'postcss-loader',
           },
           {
             loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            }
           },
         ],
       },
@@ -63,15 +69,13 @@ module.exports = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:8].css',
-    }),
+    new webpack.HashedModuleIdsPlugin(),
     new CleanWebpackPlugin(),
     new ManifestPlugin({
       fileName: '../server/asset-manifest.json',
     }),
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: '"production"'},
+      'process.env': { NODE_ENV: '"production"' },
       __IS_PROD__: true,
       __SERVER__: false,
     }),
@@ -82,19 +86,19 @@ module.exports = {
         uglifyOptions: {
           compress: {
             drop_console: true,
-            drop_debugger: true
+            drop_debugger: true,
           },
           warnings: false,
           ie8: true,
           output: {
-            comments: false
-          }
+            comments: false,
+          },
         },
         cache: true,
         parallel: true,
-        sourceMap: false
+        sourceMap: false,
       }),
-      new OptimizeCSSAssetsPlugin()
+      new OptimizeCSSAssetsPlugin(),
     ],
     splitChunks: {
       cacheGroups: {
@@ -102,9 +106,9 @@ module.exports = {
         libs: {
           test: /node_modules/,
           chunks: 'initial',
-          name: 'libs' // 打包后的文件名，任意命名
-        }
-      }
-    }
-  }
+          name: 'libs', // 打包后的文件名，任意命名
+        },
+      },
+    },
+  },
 };

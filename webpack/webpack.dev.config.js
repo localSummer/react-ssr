@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const resolve = (pathStr) => path.resolve(__dirname, pathStr);
 
@@ -16,6 +15,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css', '.less'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   module: {
     rules: [
@@ -28,16 +30,22 @@ module.exports = {
         test: /\.(le|c)ss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'isomorphic-style-loader',
           },
           {
             loader: 'css-loader',
+            options: {
+              importLoaders: 2
+            }
           },
           {
             loader: 'postcss-loader',
           },
           {
             loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            }
           },
         ],
       },
@@ -59,9 +67,6 @@ module.exports = {
       'process.env': { NODE_ENV: '"development"' },
       __IS_PROD__: false,
       __SERVER__: false,
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
     }),
   ],
   optimization: {

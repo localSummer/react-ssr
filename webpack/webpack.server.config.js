@@ -7,6 +7,14 @@ const isProd = process.env.NODE_ENV === 'production';
 
 process.env.BABEL_ENV = 'node'; // 设置 babel 的运行环境
 
+const plugins = []
+
+if (isProd) {
+  plugins.push(
+    new webpack.HashedModuleIdsPlugin(),
+  )
+}
+
 module.exports = {
   mode: process.env.NODE_ENV,
   target: 'node',
@@ -30,6 +38,29 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.(le|c)ss$/,
+        use: [
+          {
+            loader: 'isomorphic-style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            }
+          },
+        ],
+      },
+      {
         test: /\.(png|jpg|gif)$/,
         use: {
           loader: 'file-loader',
@@ -43,6 +74,7 @@ module.exports = {
     ],
   },
   plugins: [
+    ...plugins,
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: `"${process.env.NODE_ENV}"` },
       __SERVER__: true,

@@ -2,6 +2,8 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import { Helmet } from 'react-helmet';
+//css 同构的上下文
+import StyleContext from 'isomorphic-style-loader/StyleContext';
 
 import Layout from '../../client/app/layout';
 import routeList, { matchRoute } from '../../client/router/route-config';
@@ -48,15 +50,26 @@ export default async (ctx, next) => {
     tdk = page.tdk;
   }
 
+  const css = new Set();
+  const insertCss = (...styles) =>
+    styles.forEach((style) => css.add(style._getContent()));
   const html = renderToString(
     <StaticRouter>
-      <Layout>
-        <targetRoute.component
-          initialData={fetchResult}
-        ></targetRoute.component>
-      </Layout>
+      <StyleContext.Provider value={{ insertCss }}>
+        <Layout>
+          <targetRoute.component
+            initialData={fetchResult}
+          ></targetRoute.component>
+        </Layout>
+      </StyleContext.Provider>
     </StaticRouter>
   );
+
+  const styles = [];
+  [...css].forEach((item) => {
+    let [mid, content] = item[0];
+    styles.push(`<style id="s${mid}-0">${content}</style>`);
+  });
 
   const helmet = Helmet.renderStatic();
 
@@ -67,7 +80,7 @@ export default async (ctx, next) => {
       <meta charset="UTF-8"/>
       ${helmet.title.toString()}
       ${helmet.meta.toString()}
-      ${assetsMap.css.join('')}
+      ${styles.join('')}
     </head>
     <body>
       <div id="root">${html}</div>

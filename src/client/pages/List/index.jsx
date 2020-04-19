@@ -1,7 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import withStyles from 'isomorphic-style-loader/withStyles'
 import { mockData } from './data';
 import PageContainer from '../../common/components/PageContainer'
+import styles from './index.less'
 
 class List extends React.Component {
   constructor(props) {
@@ -58,4 +60,4 @@ class List extends React.Component {
   }
 }
 
-export default PageContainer(List);
+export default withStyles(styles)(PageContainer(List));
