@@ -18,8 +18,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css', '.less'],
     alias: {
-      '@dist': path.resolve(__dirname, '../dist')
-    }
+      '@dist': path.resolve(__dirname, '../dist'),
+    },
   },
   externals: [nodeExternals()], // externals来排除不需要打包的模块，因为 node 端会自动载入这些包，可以让打包的文件更小
   module: {
@@ -29,11 +29,22 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            emitFile: false,
+            name: isProd ? 'img/[name].[hash:8].[ext]' : 'img/[name].[ext]',
+            publicPath: isProd ? '/' : 'http://localhost:9002',
+          },
+        },
+      },
     ],
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: `"${process.env.NODE_ENV}"`},
+      'process.env': { NODE_ENV: `"${process.env.NODE_ENV}"` },
       __SERVER__: true,
       __IS_PROD__: isProd,
     }),

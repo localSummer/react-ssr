@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import Layout from '../../client/app/layout';
 import routeList, { matchRoute } from '../../client/router/route-config';
 import getAssets from '../common/assets';
+import getStaticRoutes from '../common/get-static-routes';
 
 // 得到静态资源
 const assetsMap = getAssets();
@@ -21,8 +22,11 @@ export default async (ctx, next) => {
 
   console.log('ctx.request.path.', ctx.request.path);
 
+  // 获取静态路由
+  const staticRoutesList = await getStaticRoutes(routeList);
+
   // 查找到目标路由对象
-  let targetRoute = matchRoute(path, routeList);
+  let targetRoute = matchRoute(path, staticRoutesList);
 
   // 数据预取
   let fetchDataFn = targetRoute.component.getInitialProps;
@@ -41,13 +45,15 @@ export default async (ctx, next) => {
   };
 
   if (page && page.tdk) {
-    tdk = page.tdk
+    tdk = page.tdk;
   }
 
   const html = renderToString(
     <StaticRouter>
       <Layout>
-        <targetRoute.component initialData={ fetchResult }></targetRoute.component>
+        <targetRoute.component
+          initialData={fetchResult}
+        ></targetRoute.component>
       </Layout>
     </StaticRouter>
   );

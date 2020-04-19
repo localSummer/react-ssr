@@ -17,6 +17,9 @@ class Layout extends React.Component {
         <NavLink style={{ marginLeft: '10px' }} to="/list">
           列表页
         </NavLink>
+        <NavLink style={{ marginLeft: '10px' }} to="/404">
+          404页面
+        </NavLink>
         {this.props.children}
       </div>
     );

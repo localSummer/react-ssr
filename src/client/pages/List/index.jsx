@@ -1,16 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { mockData } from './data';
+import PageContainer from '../../common/components/PageContainer'
 
 class List extends React.Component {
   constructor(props) {
     super(props);
-
-    const initData = props.initialData || {};
-    this.state = {
-      page: initData.page,
-      fetchData: initData.fetchData,
-    };
   }
 
   static async getInitialProps() {
@@ -38,21 +33,9 @@ class List extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log('this.state: ', this.state);
-    if (!this.state.fetchData) {
-      List.getInitialProps().then((res) => {
-        this.setState({
-          fetchData: res.fetchData,
-          page: res.page,
-        });
-      });
-    }
-  }
-
   render() {
-    const { code, data } = this.state.fetchData || {};
-    const { tdk = {} } = this.state.page || {};
+    const { fetchData = {}, page = {} } = this.props.initialData || {};
+    const { tdk = {} } = page;
     return (
       <div>
         <Helmet>
@@ -60,8 +43,8 @@ class List extends React.Component {
           <meta name="description" content={tdk.description} />
           <meta name="keywords" content={tdk.keywords} />
         </Helmet>
-        {data &&
-          data.map((item, index) => {
+        {fetchData.data &&
+          fetchData.data.map((item, index) => {
             return (
               <div key={index}>
                 <h3>{item.title}</h3>
@@ -69,10 +52,10 @@ class List extends React.Component {
               </div>
             );
           })}
-        {!data && <div>暂无数据</div>}
+        {!fetchData.data && <div>暂无数据</div>}
       </div>
     );
   }
 }
 
-export default List;
+export default PageContainer(List);

@@ -1,1 +1,306 @@
-!function(e){var t={};function n(a){if(t[a])return t[a].exports;var r=t[a]={i:a,l:!1,exports:{}};return e[a].call(r.exports,r,r.exports,n),r.l=!0,r.exports}n.m=e,n.c=t,n.d=function(e,t,a){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:a})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var a=Object.create(null);if(n.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)n.d(a,r,function(t){return e[t]}.bind(null,r));return a},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=9)}([function(e,t){e.exports=require("react")},function(e,t){e.exports=require("react-helmet")},function(e,t){e.exports=require("react-router")},function(e,t){e.exports=require("react-router-dom")},function(e,t){e.exports=require("koa2")},function(e,t){e.exports=require("koa-static")},function(e,t){e.exports=require("react-dom/server")},function(e,t){e.exports={wdsPort:9002,nodeServerPort:9001}},function(e){e.exports=JSON.parse('{"libs.js":"/js/libs.4d4b2bb4.js","main.css":"/css/main.acb57427.css","main.js":"/js/main.5f5f98d3.js"}')},function(e,t,n){"use strict";n.r(t);var a=n(4),r=n.n(a),s=n(5),i=n.n(s),o=n(0),c=n.n(o),l=n(6),u=n(2),p=n(1),d=n(3);class m extends c.a.Component{constructor(e){super(e)}render(){return c.a.createElement("div",{className:"layout-box"},c.a.createElement("h1",null,"koa+react+ssr"),c.a.createElement(d.NavLink,{to:"/index",style:{marginLeft:"10px"}},"首页"),c.a.createElement(d.NavLink,{style:{marginLeft:"10px"},to:"/list"},"列表页"),this.props.children)}}var f=m;class h extends c.a.Component{constructor(e){super(e);const t=e.initialData||{};this.state={page:t.page}}static async getInitialProps(){return{page:{tdk:{title:"首页 - react ssr",keywords:"前端技术江湖",description:"关键词"}}}}componentDidMount(){this.state.page||h.getInitialProps().then(e=>{this.setState({page:e.page})})}handleClick(){alert("一起来玩 react ssr 呀,点我有反应吗？")}render(){const{tdk:e={}}=this.state.page||{};return c.a.createElement("div",{className:"page-index-box"},c.a.createElement(p.Helmet,null,c.a.createElement("title",null,e.title),c.a.createElement("meta",{name:"description",content:e.description}),c.a.createElement("meta",{name:"keywords",content:e.keywords})),c.a.createElement("span",{onClick:this.handleClick},"首页"))}}var g=h;const y=[{title:"深入浅出TypeScript：从基础知识到类型编程",desc:"Vue3 源码及开发必备基础，从基础知识到类型工具设计，从理论到实战，手把手让你从零基础成为进阶使用者。",img:"https://user-gold-cdn.xitu.io/2019/11/8/16e4ab5d6aff406a?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"},{title:"SVG 动画开发实战手册",desc:"从0到1，学习SVG动画开发知识，快速高效完成SVG动画效果开发。",img:"https://user-gold-cdn.xitu.io/2019/9/26/16d6bda264ac27e4?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"},{title:"预售JavaScript 设计模式核⼼原理与应⽤实践",desc:"通俗易懂的编程“套路“学。带你深入看似高深实则接地气的设计模式原理，在实际场景中内化设计模式的”道“与”术“。学会驾驭代码，而非被其奴役。",img:"https://user-gold-cdn.xitu.io/2019/9/16/16d382e623923d91?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1"}];class x extends c.a.Component{constructor(e){super(e);const t=e.initialData||{};this.state={page:t.page,fetchData:t.fetchData}}static async getInitialProps(){return{fetchData:await new Promise((e,t)=>{setTimeout(()=>{e({code:0,data:y})},500)}),page:{tdk:{title:"列表页",keywords:"React 服务端渲染",description:"React 双端同构"}}}}componentDidMount(){console.log("this.state: ",this.state),this.state.fetchData||x.getInitialProps().then(e=>{this.setState({fetchData:e.fetchData,page:e.page})})}render(){const{code:e,data:t}=this.state.fetchData||{},{tdk:n={}}=this.state.page||{};return c.a.createElement("div",null,c.a.createElement(p.Helmet,null,c.a.createElement("title",null,n.title),c.a.createElement("meta",{name:"description",content:n.description}),c.a.createElement("meta",{name:"keywords",content:n.keywords})),t&&t.map((e,t)=>c.a.createElement("div",{key:t},c.a.createElement("h3",null,e.title),c.a.createElement("p",null,e.desc))),!t&&c.a.createElement("div",null,"暂无数据"))}}var b=[{path:"/",component:g,exact:!0},{path:"/index",component:g,exact:!0},{path:"/list",component:x,exact:!0}];const v=function(){let e=["libs.js","main.js"],t=["main.css"];const a={js:[],css:[]};{const r=n(8);e.forEach(e=>{r[e]&&a.js.push(`<script type="text/javascript"  src="${r[e]}"><\/script>`)}),t.forEach(e=>{r[e]&&a.css.push(`<link rel="stylesheet" type="text/css" href="${r[e]}" />`)})}return a}();var E=n(7);const j=n.n(E).a.nodeServerPort||Object({NODE_ENV:"production"}).PORT,k=new r.a;k.use(i()("./dist/static")),k.use(async(e,t)=>{const n=e.request.path;if(n.indexOf(".")>-1)return e.body=null,t();console.log("ctx.request.path.",e.request.path);let a=((e,t)=>{let n;for(let a of t)if(Object(u.matchPath)(e,a)){n=a;break}return n})(n,b),r=a.component.getInitialProps,s={};r&&(s=await r());let{page:i}=s||{},o={title:"默认标题 - my react ssr",keywords:"默认关键词",description:"默认描述"};i&&i.tdk&&(o=i.tdk);const d=Object(l.renderToString)(c.a.createElement(u.StaticRouter,null,c.a.createElement(f,null,c.a.createElement(a.component,{initialData:s})))),m=p.Helmet.renderStatic();e.body=`\n    <!DOCTYPE html>\n    <html lang="en">\n    <head>\n      <meta charset="UTF-8"/>\n      ${m.title.toString()}\n      ${m.meta.toString()}\n      ${v.css.join("")}\n    </head>\n    <body>\n      <div id="root">${d}</div>\n      <textarea id="ssrTextInitData" style="display:none;">\n        ${JSON.stringify(s)}\n      </textarea>\n      ${v.js.join("")}\n    </body>\n    </html>\n  `,await t()}),k.listen(j),console.log("server is start .","http://localhost:"+j)}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded chunks
+/******/ 	// "0" means "already loaded"
+/******/ 	var installedChunks = {
+/******/ 		"main": 0
+/******/ 	};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// require() chunk loading for javascript
+/******/
+/******/ 		// "0" is the signal for "already loaded"
+/******/ 		if(installedChunks[chunkId] !== 0) {
+/******/ 			var chunk = require("./" + chunkId + ".app.js");
+/******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
+/******/ 			for(var moduleId in moreModules) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 			for(var i = 0; i < chunkIds.length; i++)
+/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// uncaught error handler for webpack runtime
+/******/ 	__webpack_require__.oe = function(err) {
+/******/ 		process.nextTick(function() {
+/******/ 			throw err; // catch this error by using import().catch()
+/******/ 		});
+/******/ 	};
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/server/app/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/client/app/layout.jsx":
+/*!***********************************!*\
+  !*** ./src/client/app/layout.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nclass Layout extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {\n  constructor(props) {\n    super(props);\n  }\n\n  render() {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"layout-box\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"h1\", null, \"koa+react+ssr\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__[\"NavLink\"], {\n      to: \"/index\",\n      style: {\n        marginLeft: '10px'\n      }\n    }, \"\\u9996\\u9875\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__[\"NavLink\"], {\n      style: {\n        marginLeft: '10px'\n      },\n      to: \"/list\"\n    }, \"\\u5217\\u8868\\u9875\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__[\"NavLink\"], {\n      style: {\n        marginLeft: '10px'\n      },\n      to: \"/404\"\n    }, \"404\\u9875\\u9762\"), this.props.children);\n  }\n\n} //带入路由信息\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Layout);\n\n//# sourceURL=webpack:///./src/client/app/layout.jsx?");
+
+/***/ }),
+
+/***/ "./src/client/router/async-bundle.js":
+/*!*******************************************!*\
+  !*** ./src/client/router/async-bundle.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nfunction LoadingComponent(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"loading......\");\n}\n/**\n * 动态加载组件一个组的容器\n *\n * @class Bundle\n * @extends {Component}\n */\n\n\nclass AsyncBundle extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      mod: null\n    };\n  }\n\n  componentDidMount() {\n    if (!this.state.mod) {\n      this.load(this.props);\n    }\n  }\n\n  load(props) {\n    this.setState({\n      mod: null\n    });\n    props.load().then(mod => {\n      this.setState({\n        mod: mod.default ? mod.default : mod\n      });\n    });\n  }\n\n  render() {\n    return this.state.mod ? this.props.children(this.state.mod) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoadingComponent, null);\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (AsyncBundle);\n\n//# sourceURL=webpack:///./src/client/router/async-bundle.js?");
+
+/***/ }),
+
+/***/ "./src/client/router/async-loader.js":
+/*!*******************************************!*\
+  !*** ./src/client/router/async-loader.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _async_bundle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./async-bundle */ \"./src/client/router/async-bundle.js\");\n/* harmony import */ var _share_pro_config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../share/pro-config */ \"./src/share/pro-config.js\");\n/* harmony import */ var _share_pro_config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_share_pro_config__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nfunction AsyncLoader(loader) {\n  function AsyncComponent(props) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_async_bundle__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      load: loader\n    }, Comp => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Comp, props));\n  }\n\n  AsyncComponent[_share_pro_config__WEBPACK_IMPORTED_MODULE_2___default.a.asyncComponentKey] = true;\n  return AsyncComponent;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (AsyncLoader);\n\n//# sourceURL=webpack:///./src/client/router/async-loader.js?");
+
+/***/ }),
+
+/***/ "./src/client/router/route-config.jsx":
+/*!********************************************!*\
+  !*** ./src/client/router/route-config.jsx ***!
+  \********************************************/
+/*! exports provided: default, matchRoute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"matchRoute\", function() { return matchRoute; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ \"react-router\");\n/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _async_loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./async-loader */ \"./src/client/router/async-loader.js\");\n\n\n\n\nfunction pageNotFound() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"404\\u9875\\u9762\");\n}\n\nconst routeList = [{\n  path: ['/', '/index'],\n  component: Object(_async_loader__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(() => __webpack_require__.e(/*! import() | chunk-index */ \"chunk-index\").then(__webpack_require__.bind(null, /*! ../pages/Index */ \"./src/client/pages/Index/index.jsx\"))),\n  exact: true\n}, {\n  path: '/list',\n  component: Object(_async_loader__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(() => __webpack_require__.e(/*! import() | chunk-list */ \"chunk-list\").then(__webpack_require__.bind(null, /*! ../pages/List */ \"./src/client/pages/List/index.jsx\"))),\n  exact: true\n}, {\n  path: '*',\n  component: pageNotFound,\n  exact: true\n}];\n/* harmony default export */ __webpack_exports__[\"default\"] = (routeList);\nconst matchRoute = (path, routeList) => {\n  let route;\n\n  for (let item of routeList) {\n    if (Object(react_router__WEBPACK_IMPORTED_MODULE_1__[\"matchPath\"])(path, item)) {\n      route = item;\n      break;\n    }\n  }\n\n  return route;\n};\n\n//# sourceURL=webpack:///./src/client/router/route-config.jsx?");
+
+/***/ }),
+
+/***/ "./src/server/app/index.js":
+/*!*********************************!*\
+  !*** ./src/server/app/index.js ***!
+  \*********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var koa2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! koa2 */ \"koa2\");\n/* harmony import */ var koa2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(koa2__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var koa_static__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! koa-static */ \"koa-static\");\n/* harmony import */ var koa_static__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(koa_static__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _middlewares_react_ssr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../middlewares/react-ssr */ \"./src/server/middlewares/react-ssr.js\");\n/* harmony import */ var _share_pro_config_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../share/pro-config.js */ \"./src/share/pro-config.js\");\n/* harmony import */ var _share_pro_config_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_share_pro_config_js__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\nconst port = _share_pro_config_js__WEBPACK_IMPORTED_MODULE_3___default.a.nodeServerPort || Object({\"NODE_ENV\":\"development\"}).PORT;\nconst app = new koa2__WEBPACK_IMPORTED_MODULE_0___default.a();\napp.use(koa_static__WEBPACK_IMPORTED_MODULE_1___default()('./dist/static'));\napp.use(_middlewares_react_ssr__WEBPACK_IMPORTED_MODULE_2__[\"default\"]); // 启动服务\n\napp.listen(port);\nconsole.log('server is start .', `http://localhost:${port}`);\n\n//# sourceURL=webpack:///./src/server/app/index.js?");
+
+/***/ }),
+
+/***/ "./src/server/common/assets.js":
+/*!*************************************!*\
+  !*** ./src/server/common/assets.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n//生产环境中 静态资源的处理\n/* harmony default export */ __webpack_exports__[\"default\"] = (function () {\n  let devHost = '//localhost:9002';\n  let jsFiles = ['libs.js', 'main.js'];\n  let cssFiles = ['main.css'];\n  const assets = {\n    js: [],\n    css: []\n  };\n\n  if (true) {\n    //开发环境\n    assets.js.push(`<script type=\"text/javascript\"  src=\"${devHost}/libs.js\"></script>`);\n    assets.js.push(`<script type=\"text/javascript\"  src=\"${devHost}/main.js\"></script>`);\n    assets.css.push(`<link rel=\"stylesheet\" type=\"text/css\" href=\"${devHost}/main.css\" />`);\n  } else {}\n\n  return assets;\n});\n;\n\n//# sourceURL=webpack:///./src/server/common/assets.js?");
+
+/***/ }),
+
+/***/ "./src/server/common/get-static-routes.js":
+/*!************************************************!*\
+  !*** ./src/server/common/get-static-routes.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _share_pro_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../share/pro-config */ \"./src/share/pro-config.js\");\n/* harmony import */ var _share_pro_config__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_share_pro_config__WEBPACK_IMPORTED_MODULE_0__);\n\n\nconst checkIsAsyncRoute = component => {\n  return component[_share_pro_config__WEBPACK_IMPORTED_MODULE_0___default.a.asyncComponentKey];\n};\n\nasync function getStaticRoutes(routes) {\n  const key = '__dynamics_route_to_static';\n\n  if (global[key]) {\n    return global[key];\n  }\n\n  let len = routes.length,\n      i = 0;\n  const staticRoutes = [];\n\n  for (; i < len; i++) {\n    let item = routes[i];\n\n    if (checkIsAsyncRoute(item.component)) {\n      staticRoutes.push({ ...item,\n        component: (await item.component().props.load()).default\n      });\n    } else {\n      staticRoutes.push({ ...item\n      });\n    }\n  }\n\n  global[key] = staticRoutes;\n  return staticRoutes;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (getStaticRoutes);\n\n//# sourceURL=webpack:///./src/server/common/get-static-routes.js?");
+
+/***/ }),
+
+/***/ "./src/server/middlewares/react-ssr.js":
+/*!*********************************************!*\
+  !*** ./src/server/middlewares/react-ssr.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ \"react-router\");\n/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-helmet */ \"react-helmet\");\n/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _client_app_layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../client/app/layout */ \"./src/client/app/layout.jsx\");\n/* harmony import */ var _client_router_route_config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../client/router/route-config */ \"./src/client/router/route-config.jsx\");\n/* harmony import */ var _common_assets__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/assets */ \"./src/server/common/assets.js\");\n/* harmony import */ var _common_get_static_routes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/get-static-routes */ \"./src/server/common/get-static-routes.js\");\n\n\n\n\n\n\n\n // 得到静态资源\n\nconst assetsMap = Object(_common_assets__WEBPACK_IMPORTED_MODULE_6__[\"default\"])();\n/* harmony default export */ __webpack_exports__[\"default\"] = (async (ctx, next) => {\n  const path = ctx.request.path; // 等同于 ctx.req.url\n  // /favicon.ico 特别处理\n\n  if (path.indexOf('.') > -1) {\n    ctx.body = null;\n    return next();\n  }\n\n  console.log('ctx.request.path.', ctx.request.path); // 获取静态路由\n\n  const staticRoutesList = await Object(_common_get_static_routes__WEBPACK_IMPORTED_MODULE_7__[\"default\"])(_client_router_route_config__WEBPACK_IMPORTED_MODULE_5__[\"default\"]); // 查找到目标路由对象\n\n  let targetRoute = Object(_client_router_route_config__WEBPACK_IMPORTED_MODULE_5__[\"matchRoute\"])(path, staticRoutesList); // 数据预取\n\n  let fetchDataFn = targetRoute.component.getInitialProps;\n  let fetchResult = {};\n\n  if (fetchDataFn) {\n    fetchResult = await fetchDataFn();\n  }\n\n  let {\n    page\n  } = fetchResult || {};\n  let tdk = {\n    title: '默认标题 - my react ssr',\n    keywords: '默认关键词',\n    description: '默认描述'\n  };\n\n  if (page && page.tdk) {\n    tdk = page.tdk;\n  }\n\n  const html = Object(react_dom_server__WEBPACK_IMPORTED_MODULE_1__[\"renderToString\"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__[\"StaticRouter\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_client_app_layout__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(targetRoute.component, {\n    initialData: fetchResult\n  }))));\n  const helmet = react_helmet__WEBPACK_IMPORTED_MODULE_3__[\"Helmet\"].renderStatic();\n  ctx.body = `\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n      <meta charset=\"UTF-8\"/>\n      ${helmet.title.toString()}\n      ${helmet.meta.toString()}\n      ${assetsMap.css.join('')}\n    </head>\n    <body>\n      <div id=\"root\">${html}</div>\n      <textarea id=\"ssrTextInitData\" style=\"display:none;\">\n        ${JSON.stringify(fetchResult)}\n      </textarea>\n      ${assetsMap.js.join('')}\n    </body>\n    </html>\n  `;\n  await next();\n});\n\n//# sourceURL=webpack:///./src/server/middlewares/react-ssr.js?");
+
+/***/ }),
+
+/***/ "./src/share/pro-config.js":
+/*!*********************************!*\
+  !*** ./src/share/pro-config.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("//双端公用的配置文件\nmodule.exports = {\n  wdsPort: 9002,\n  // wds 服务的运行端口\n  nodeServerPort: 9001,\n  // node server 的监听端口\n  asyncComponentKey: '__IS_ASYNC_COMP_FLAG__' // 标志组件是否是按需加载 turn | false\n\n};\n\n//# sourceURL=webpack:///./src/share/pro-config.js?");
+
+/***/ }),
+
+/***/ "koa-static":
+/*!*****************************!*\
+  !*** external "koa-static" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"koa-static\");\n\n//# sourceURL=webpack:///external_%22koa-static%22?");
+
+/***/ }),
+
+/***/ "koa2":
+/*!***********************!*\
+  !*** external "koa2" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"koa2\");\n\n//# sourceURL=webpack:///external_%22koa2%22?");
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react\");\n\n//# sourceURL=webpack:///external_%22react%22?");
+
+/***/ }),
+
+/***/ "react-dom/server":
+/*!***********************************!*\
+  !*** external "react-dom/server" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react-dom/server\");\n\n//# sourceURL=webpack:///external_%22react-dom/server%22?");
+
+/***/ }),
+
+/***/ "react-helmet":
+/*!*******************************!*\
+  !*** external "react-helmet" ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react-helmet\");\n\n//# sourceURL=webpack:///external_%22react-helmet%22?");
+
+/***/ }),
+
+/***/ "react-router":
+/*!*******************************!*\
+  !*** external "react-router" ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react-router\");\n\n//# sourceURL=webpack:///external_%22react-router%22?");
+
+/***/ }),
+
+/***/ "react-router-dom":
+/*!***********************************!*\
+  !*** external "react-router-dom" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react-router-dom\");\n\n//# sourceURL=webpack:///external_%22react-router-dom%22?");
+
+/***/ })
+
+/******/ });

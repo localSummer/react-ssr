@@ -1,15 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import PageContainer from '../../common/components/PageContainer'
 import './index.less';
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
-
-    const initData = props.initialData || {};
-    this.state = {
-      page: initData.page,
-    };
   }
 
   static async getInitialProps() {
@@ -24,22 +20,13 @@ class Index extends React.Component {
     };
   }
 
-  componentDidMount() {
-    if (!this.state.page) {
-      Index.getInitialProps().then((res) => {
-        this.setState({
-          page: res.page,
-        });
-      });
-    }
-  }
-
   handleClick() {
     alert('一起来玩 react ssr 呀,点我有反应吗？');
   }
 
   render() {
-    const { tdk = {} } = this.state.page || {};
+    const { page = {} } = this.props.initialData || {};
+    const { tdk = {} } = page;
     return (
       <div className="page-index-box">
         <Helmet>
@@ -48,9 +35,10 @@ class Index extends React.Component {
           <meta name="keywords" content={tdk.keywords} />
         </Helmet>
         <span onClick={ this.handleClick }>首页</span>
+        <p>首页主视觉</p>
       </div>
     );
   }
 }
 
-export default Index;
+export default PageContainer(Index);

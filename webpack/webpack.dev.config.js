@@ -7,11 +7,12 @@ const resolve = (pathStr) => path.resolve(__dirname, pathStr);
 module.exports = {
   mode: 'development',
   entry: {
-    main: resolve('../src/client/app/index.jsx'),
+    main: ['react-hot-loader/patch', resolve('../src/client/app/index.jsx')],
   },
   output: {
     path: resolve('../dist/static'),
     filename: '[name].js',
+    publicPath: 'http://localhost:9002/'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css', '.less'],

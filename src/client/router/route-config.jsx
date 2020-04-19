@@ -1,23 +1,27 @@
+import React from 'react';
 import { matchPath } from 'react-router';
-import Index from '../pages/Index';
-import List from '../pages/List';
+import AsyncLoader from './async-loader';
+
+function pageNotFound() {
+  return <div>404页面</div>;
+}
 
 const routeList = [
   {
-    path: '/',
-    component: Index,
-    exact: true
-  },
-  {
-    path: '/index',
-    component: Index,
-    exact: true
+    path: ['/', '/index'],
+    component: AsyncLoader(() => import(/*webpackChunkName:"chunk-index"*/'../pages/Index')),
+    exact: true,
   },
   {
     path: '/list',
-    component: List,
-    exact: true
-  }
+    component: AsyncLoader(() => import(/*webpackChunkName:"chunk-list"*/'../pages/List')),
+    exact: true,
+  },
+  {
+    path: '*',
+    component: pageNotFound,
+    exact: true,
+  },
 ];
 
 export default routeList;
@@ -32,4 +36,4 @@ export const matchRoute = (path, routeList) => {
   }
 
   return route;
-}
+};
