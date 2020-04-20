@@ -177,6 +177,30 @@ eval("\n    var refs = 0;\n    var css = __webpack_require__(/*! !../../../node_
 
 /***/ }),
 
+/***/ "./src/client/pages/List/data.js":
+/*!***************************************!*\
+  !*** ./src/client/pages/List/data.js ***!
+  \***************************************/
+/*! exports provided: mockData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"mockData\", function() { return mockData; });\nconst mockData = [{\n  title: '深入浅出TypeScript：从基础知识到类型编程',\n  desc: 'Vue3 源码及开发必备基础，从基础知识到类型工具设计，从理论到实战，手把手让你从零基础成为进阶使用者。',\n  img: 'https://user-gold-cdn.xitu.io/2019/11/8/16e4ab5d6aff406a?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1'\n}, {\n  title: 'SVG 动画开发实战手册',\n  desc: '从0到1，学习SVG动画开发知识，快速高效完成SVG动画效果开发。',\n  img: 'https://user-gold-cdn.xitu.io/2019/9/26/16d6bda264ac27e4?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1'\n}, {\n  title: '预售JavaScript 设计模式核⼼原理与应⽤实践',\n  desc: '通俗易懂的编程“套路“学。带你深入看似高深实则接地气的设计模式原理，在实际场景中内化设计模式的”道“与”术“。学会驾驭代码，而非被其奴役。',\n  img: 'https://user-gold-cdn.xitu.io/2019/9/16/16d382e623923d91?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1'\n}];\n\n//# sourceURL=webpack:///./src/client/pages/List/data.js?");
+
+/***/ }),
+
+/***/ "./src/client/pages/List/redux/index.js":
+/*!**********************************************!*\
+  !*** ./src/client/pages/List/redux/index.js ***!
+  \**********************************************/
+/*! exports provided: ACTION_TYPE, reducer, getInitialData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ACTION_TYPE\", function() { return ACTION_TYPE; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"reducer\", function() { return reducer; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getInitialData\", function() { return getInitialData; });\n/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../data */ \"./src/client/pages/List/data.js\");\n\nconst ACTION_TYPE = {\n  changeList: 'list/changelist'\n}; // 用于更新状态 action creater\n\nconst changeList = data => ({\n  type: ACTION_TYPE.changeList,\n  data\n}); //默认数据\n\n\nconst defaultState = {\n  fetchData: {},\n  page: {}\n};\nconst reducer = (state = defaultState, action) => {\n  switch (action.type) {\n    case ACTION_TYPE.changeList:\n      return { ...state,\n        ...action.data\n      };\n\n    default:\n      return state;\n  }\n}; // 异步获得数据 【副作用】 返回Promise类型\n\nconst getInitialData = props => {\n  return (dispatch, getState) => {\n    return new Promise(resolve => {\n      // 延迟 500ms 返回数据\n      setTimeout(() => {\n        const data = {\n          fetchData: {\n            code: 0,\n            data: _data__WEBPACK_IMPORTED_MODULE_0__[\"mockData\"]\n          },\n          page: {\n            tdk: {\n              title: '列表页 - koa-react-ssr',\n              keywords: '关键词 koa-react-ssr',\n              description: '描述 koa-react-ssr'\n            }\n          }\n        };\n        resolve(data); //更新状态\n\n        dispatch(changeList(data));\n      }, 500);\n    });\n  };\n};\n\n//# sourceURL=webpack:///./src/client/pages/List/redux/index.js?");
+
+/***/ }),
+
 /***/ "./src/client/router/async-bundle.js":
 /*!*******************************************!*\
   !*** ./src/client/router/async-bundle.js ***!
@@ -257,7 +281,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sha
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ \"react-router\");\n/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-helmet */ \"react-helmet\");\n/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var isomorphic_style_loader_StyleContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! isomorphic-style-loader/StyleContext */ \"isomorphic-style-loader/StyleContext\");\n/* harmony import */ var isomorphic_style_loader_StyleContext__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(isomorphic_style_loader_StyleContext__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _client_app_layout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../client/app/layout */ \"./src/client/app/layout.jsx\");\n/* harmony import */ var _client_router_route_config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../client/router/route-config */ \"./src/client/router/route-config.jsx\");\n/* harmony import */ var _common_assets__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/assets */ \"./src/server/common/assets.js\");\n/* harmony import */ var _common_get_static_routes__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../common/get-static-routes */ \"./src/server/common/get-static-routes.js\");\n\n\n\n //css 同构的上下文\n\n\n\n\n\n // 得到静态资源\n\nconst assetsMap = Object(_common_assets__WEBPACK_IMPORTED_MODULE_7__[\"default\"])();\n/* harmony default export */ __webpack_exports__[\"default\"] = (async (ctx, next) => {\n  const path = ctx.request.path; // 等同于 ctx.req.url\n  // /favicon.ico 特别处理\n\n  if (path.indexOf('.') > -1) {\n    ctx.body = null;\n    return next();\n  }\n\n  console.log('ctx.request.path.', ctx.request.path); // 获取静态路由\n\n  const staticRoutesList = await Object(_common_get_static_routes__WEBPACK_IMPORTED_MODULE_8__[\"default\"])(_client_router_route_config__WEBPACK_IMPORTED_MODULE_6__[\"default\"]); // 查找到目标路由对象\n\n  let targetRoute = Object(_client_router_route_config__WEBPACK_IMPORTED_MODULE_6__[\"matchRoute\"])(path, staticRoutesList); // 数据预取\n\n  let fetchDataFn = targetRoute.component.getInitialProps;\n  let fetchResult = {};\n\n  if (fetchDataFn) {\n    fetchResult = await fetchDataFn();\n  }\n\n  let {\n    page\n  } = fetchResult || {};\n  let tdk = {\n    title: '默认标题 - my react ssr',\n    keywords: '默认关键词',\n    description: '默认描述'\n  };\n\n  if (page && page.tdk) {\n    tdk = page.tdk;\n  }\n\n  const css = new Set();\n\n  const insertCss = (...styles) => styles.forEach(style => css.add(style._getContent()));\n\n  const html = Object(react_dom_server__WEBPACK_IMPORTED_MODULE_1__[\"renderToString\"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__[\"StaticRouter\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(isomorphic_style_loader_StyleContext__WEBPACK_IMPORTED_MODULE_4___default.a.Provider, {\n    value: {\n      insertCss\n    }\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_client_app_layout__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(targetRoute.component, {\n    initialData: fetchResult\n  })))));\n  const styles = [];\n  [...css].forEach(item => {\n    let [mid, content] = item[0];\n    styles.push(`<style id=\"s${mid}-0\">${content}</style>`);\n  });\n  const helmet = react_helmet__WEBPACK_IMPORTED_MODULE_3__[\"Helmet\"].renderStatic();\n  ctx.body = `\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n      <meta charset=\"UTF-8\"/>\n      ${helmet.title.toString()}\n      ${helmet.meta.toString()}\n      ${styles.join('')}\n    </head>\n    <body>\n      <div id=\"root\">${html}</div>\n      <textarea id=\"ssrTextInitData\" style=\"display:none;\">\n        ${JSON.stringify(fetchResult)}\n      </textarea>\n      ${assetsMap.js.join('')}\n    </body>\n    </html>\n  `;\n  await next();\n});\n\n//# sourceURL=webpack:///./src/server/middlewares/react-ssr.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ \"react-router\");\n/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-helmet */ \"react-helmet\");\n/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var isomorphic_style_loader_StyleContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! isomorphic-style-loader/StyleContext */ \"isomorphic-style-loader/StyleContext\");\n/* harmony import */ var isomorphic_style_loader_StyleContext__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(isomorphic_style_loader_StyleContext__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ \"react-redux\");\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _share_redux_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../share/redux/store */ \"./src/share/redux/store.js\");\n/* harmony import */ var _client_app_layout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../client/app/layout */ \"./src/client/app/layout.jsx\");\n/* harmony import */ var _client_router_route_config__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../client/router/route-config */ \"./src/client/router/route-config.jsx\");\n/* harmony import */ var _common_assets__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../common/assets */ \"./src/server/common/assets.js\");\n/* harmony import */ var _common_get_static_routes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../common/get-static-routes */ \"./src/server/common/get-static-routes.js\");\n\n\n\n //css 同构的上下文\n\n\n\n\n\n\n\n // 得到静态资源\n\nconst assetsMap = Object(_common_assets__WEBPACK_IMPORTED_MODULE_9__[\"default\"])();\n/* harmony default export */ __webpack_exports__[\"default\"] = (async (ctx, next) => {\n  const path = ctx.request.path; // 等同于 ctx.req.url\n  // /favicon.ico 特别处理\n\n  if (path.indexOf('.') > -1) {\n    ctx.body = null;\n    return next();\n  }\n\n  console.log('ctx.request.path.', ctx.request.path); // 获取静态路由\n\n  const staticRoutesList = await Object(_common_get_static_routes__WEBPACK_IMPORTED_MODULE_10__[\"default\"])(_client_router_route_config__WEBPACK_IMPORTED_MODULE_8__[\"default\"]); // 查找到目标路由对象\n\n  let targetRoute = Object(_client_router_route_config__WEBPACK_IMPORTED_MODULE_8__[\"matchRoute\"])(path, staticRoutesList); // 得到 store,默认没有数据\n\n  const store = Object(_share_redux_store__WEBPACK_IMPORTED_MODULE_6__[\"default\"])(); // 数据预取\n\n  let fetchDataFn = targetRoute.component ? targetRoute.component.getInitialProps : null;\n  let fetchResult = {};\n\n  if (fetchDataFn) {\n    fetchResult = await fetchDataFn({\n      store\n    });\n  }\n\n  let {\n    page\n  } = fetchResult || {};\n  let tdk = {\n    title: '默认标题 - my react ssr',\n    keywords: '默认关键词',\n    description: '默认描述'\n  };\n\n  if (page && page.tdk) {\n    tdk = page.tdk;\n  }\n\n  const css = new Set();\n\n  const insertCss = (...styles) => styles.forEach(style => css.add(style._getContent()));\n\n  const html = Object(react_dom_server__WEBPACK_IMPORTED_MODULE_1__[\"renderToString\"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_5__[\"Provider\"], {\n    store: store\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__[\"StaticRouter\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(isomorphic_style_loader_StyleContext__WEBPACK_IMPORTED_MODULE_4___default.a.Provider, {\n    value: {\n      insertCss\n    }\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_client_app_layout__WEBPACK_IMPORTED_MODULE_7__[\"default\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(targetRoute.component, {\n    initialData: fetchResult\n  }))))));\n  const styles = [];\n  [...css].forEach(item => {\n    let [mid, content] = item[0];\n    styles.push(`<style id=\"s${mid}-0\">${content}</style>`);\n  });\n  const helmet = react_helmet__WEBPACK_IMPORTED_MODULE_3__[\"Helmet\"].renderStatic();\n  ctx.body = `\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n      <meta charset=\"UTF-8\"/>\n      ${helmet.title.toString()}\n      ${helmet.meta.toString()}\n      ${styles.join('')}\n    </head>\n    <body>\n      <div id=\"root\">${html}</div>\n      <textarea id=\"ssrTextInitData\" style=\"display:none;\">\n        ${JSON.stringify(fetchResult)}\n      </textarea>\n      ${assetsMap.js.join('')}\n    </body>\n    </html>\n  `;\n  await next();\n});\n\n//# sourceURL=webpack:///./src/server/middlewares/react-ssr.js?");
 
 /***/ }),
 
@@ -269,6 +293,30 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /***/ (function(module, exports) {
 
 eval("//双端公用的配置文件\nmodule.exports = {\n  wdsPort: 9002,\n  // wds 服务的运行端口\n  nodeServerPort: 9001,\n  // node server 的监听端口\n  asyncComponentKey: '__IS_ASYNC_COMP_FLAG__' // 标志组件是否是按需加载 turn | false\n\n};\n\n//# sourceURL=webpack:///./src/share/pro-config.js?");
+
+/***/ }),
+
+/***/ "./src/share/redux/reducer.js":
+/*!************************************!*\
+  !*** ./src/share/redux/reducer.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"redux\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _client_pages_List_redux_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../client/pages/List/redux/index */ \"./src/client/pages/List/redux/index.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"combineReducers\"])({\n  listPage: _client_pages_List_redux_index__WEBPACK_IMPORTED_MODULE_1__[\"reducer\"]\n}));\n\n//# sourceURL=webpack:///./src/share/redux/reducer.js?");
+
+/***/ }),
+
+/***/ "./src/share/redux/store.js":
+/*!**********************************!*\
+  !*** ./src/share/redux/store.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"redux\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ \"redux-thunk\");\n/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducer */ \"./src/share/redux/reducer.js\");\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ((defaultState = {}) => {\n  return Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"createStore\"])(_reducer__WEBPACK_IMPORTED_MODULE_2__[\"default\"], defaultState, Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"applyMiddleware\"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a));\n});\n\n//# sourceURL=webpack:///./src/share/redux/store.js?");
 
 /***/ }),
 
@@ -349,6 +397,17 @@ eval("module.exports = require(\"react-helmet\");\n\n//# sourceURL=webpack:///ex
 
 /***/ }),
 
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react-redux\");\n\n//# sourceURL=webpack:///external_%22react-redux%22?");
+
+/***/ }),
+
 /***/ "react-router":
 /*!*******************************!*\
   !*** external "react-router" ***!
@@ -368,6 +427,28 @@ eval("module.exports = require(\"react-router\");\n\n//# sourceURL=webpack:///ex
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"react-router-dom\");\n\n//# sourceURL=webpack:///external_%22react-router-dom%22?");
+
+/***/ }),
+
+/***/ "redux":
+/*!************************!*\
+  !*** external "redux" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"redux\");\n\n//# sourceURL=webpack:///external_%22redux%22?");
+
+/***/ }),
+
+/***/ "redux-thunk":
+/*!******************************!*\
+  !*** external "redux-thunk" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"redux-thunk\");\n\n//# sourceURL=webpack:///external_%22redux-thunk%22?");
 
 /***/ })
 

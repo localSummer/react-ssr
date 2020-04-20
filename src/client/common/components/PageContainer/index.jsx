@@ -16,7 +16,7 @@ export default (SourceComponent) => {
       let initialData = props.initialData || {};
       if (!__SERVER__) {
         initialData = window.__INITIAL_DATA__ || {};
-        window.__INITIAL_DATA__ = {}
+        window.__INITIAL_DATA__ = {};
       }
       this.state = {
         initialData,
@@ -24,16 +24,21 @@ export default (SourceComponent) => {
       };
     }
 
-    static async getInitialProps() {
+    static async getInitialProps(ctx) {
       return SourceComponent.getInitialProps
-        ? await SourceComponent.getInitialProps()
+        ? await SourceComponent.getInitialProps(ctx)
         : {};
     }
 
     async getInitialProps() {
-      const res = SourceComponent.getInitialProps
-        ? await SourceComponent.getInitialProps()
-        : {};
+      const props = this.props;
+      const store = window.__STORE__; // 从全局得到 store
+
+      const res = props.getInitialData
+      ? await props.getInitialData(store.dispatch)
+      : SourceComponent.getInitialProps
+      ? await SourceComponent.getInitialProps()
+      : {};
       this.setState({
         initialData: res,
         canClientFetch: true,
@@ -54,8 +59,9 @@ export default (SourceComponent) => {
     render() {
       const props = {
         ...this.props,
-        initialData: this.state.initialData,
+        initialData: this.state.initialData
       };
+
       return <SourceComponent {...props} />;
     }
   };

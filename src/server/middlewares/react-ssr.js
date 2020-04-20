@@ -4,7 +4,9 @@ import { StaticRouter } from 'react-router';
 import { Helmet } from 'react-helmet';
 //css 同构的上下文
 import StyleContext from 'isomorphic-style-loader/StyleContext';
+import { Provider } from 'react-redux';
 
+import getStore from '../../share/redux/store';
 import Layout from '../../client/app/layout';
 import routeList, { matchRoute } from '../../client/router/route-config';
 import getAssets from '../common/assets';
@@ -30,12 +32,15 @@ export default async (ctx, next) => {
   // 查找到目标路由对象
   let targetRoute = matchRoute(path, staticRoutesList);
 
+  // 得到 store,默认没有数据
+  const store = getStore();
+
   // 数据预取
-  let fetchDataFn = targetRoute.component.getInitialProps;
+  let fetchDataFn = targetRoute.component ? targetRoute.component.getInitialProps : null;
   let fetchResult = {};
 
   if (fetchDataFn) {
-    fetchResult = await fetchDataFn();
+    fetchResult = await fetchDataFn({ store });
   }
 
   let { page } = fetchResult || {};
@@ -54,15 +59,17 @@ export default async (ctx, next) => {
   const insertCss = (...styles) =>
     styles.forEach((style) => css.add(style._getContent()));
   const html = renderToString(
-    <StaticRouter>
-      <StyleContext.Provider value={{ insertCss }}>
-        <Layout>
-          <targetRoute.component
-            initialData={fetchResult}
-          ></targetRoute.component>
-        </Layout>
-      </StyleContext.Provider>
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter>
+        <StyleContext.Provider value={{ insertCss }}>
+          <Layout>
+            <targetRoute.component
+              initialData={fetchResult}
+              ></targetRoute.component>
+          </Layout>
+        </StyleContext.Provider>
+      </StaticRouter>
+    </Provider>
   );
 
   const styles = [];

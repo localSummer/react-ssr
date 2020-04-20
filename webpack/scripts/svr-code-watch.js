@@ -19,7 +19,7 @@ const watching = compiler.watch(
       json.errors.forEach((item) => console.log(item));
     }
     if (json.warnings) {
-      json.warnings.forEach((item) => console.log(object));
+      json.warnings.forEach((item) => console.log(item));
     }
     //定一个常量，编译完成后 通知主进程来重启node 服务，主进程通过此标志来进行判断是否重启
     console.log(constantCode.SVRCODECOMPLETED);

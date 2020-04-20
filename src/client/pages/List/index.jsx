@@ -1,38 +1,17 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import withStyles from 'isomorphic-style-loader/withStyles'
-import { mockData } from './data';
-import PageContainer from '../../common/components/PageContainer'
-import styles from './index.less'
+//action  获取初始化数据
+import { getInitialData } from './redux/index';
+import isoConnect from '../../common/components/IsoConnect';
+import styles from './index.less';
 
 class List extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  static async getInitialProps() {
-    const fetchData = () => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({
-            code: 0,
-            data: mockData,
-          });
-        }, 500);
-      });
-    };
-
-    let res = await fetchData();
-    return {
-      fetchData: res,
-      page: {
-        tdk: {
-          title: '列表页',
-          keywords: 'React 服务端渲染',
-          description: 'React 双端同构',
-        },
-      },
-    };
+  static async getInitialProps({ store }) {
+    return store.dispatch(getInitialData());
   }
 
   render() {
@@ -60,4 +39,19 @@ class List extends React.Component {
   }
 }
 
-export default withStyles(styles)(PageContainer(List));
+const mapStateToProps = (state) => ({
+  initialData: state.listPage,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getInitialData() {
+    console.log('dispath fetch data');
+    return dispatch(getInitialData());
+  },
+});
+
+export default isoConnect({
+  styles,
+  mapStateToProps,
+  mapDispatchToProps
+}, List);
